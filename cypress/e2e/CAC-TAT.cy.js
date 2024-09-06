@@ -92,11 +92,30 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
       .should('have.value','cursos')
   })
 
-  it.only ('seleciona um produto (Blog) por seu índice', () =>{
+  it ('seleciona um produto (Blog) por seu índice', () =>{
     cy.get('#product')
       .select(1)
       .should('have.value','blog')
   })
+
+  it('marca o tipo de atendimento "Feedback"', () => {
+    cy.get('input[type="radio"][value="feedback"]')
+      .check()
+      .should('be.checked')
+  })
+
+  it ('marca cada tipo de atendimento', () => {
+    cy.get('input[type="radio"][value="ajuda"]')
+      .check()
+      .should('be.checked')
+    cy.get('input[type="radio"][value="elogio"]')
+      .check()
+      .should('be.checked')
+    cy.get('input[type="radio"][value="feedback"]')
+      .check()
+      .should('be.checked')
+  })
+
 
 })
 
