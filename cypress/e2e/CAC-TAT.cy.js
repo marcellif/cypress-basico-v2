@@ -105,15 +105,13 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
   })
 
   it ('marca cada tipo de atendimento', () => {
-    cy.get('input[type="radio"][value="ajuda"]')
-      .check()
-      .should('be.checked')
-    cy.get('input[type="radio"][value="elogio"]')
-      .check()
-      .should('be.checked')
-    cy.get('input[type="radio"][value="feedback"]')
-      .check()
-      .should('be.checked')
+    cy.get('input[type="radio"]')
+      .should('have.length', 3)
+      .each(function(item){
+        cy.wrap(item).check()
+        cy.wrap(item).should('be.checked')
+      })
+    
   })
 
 
