@@ -1,3 +1,17 @@
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => { 
+    cy.get('#firstName').type('Brad')
+    cy.get('#lastName').type('Pitt')
+    cy.get('#email').type('brad@mailinator.com')
+    cy.get('#phone').type('21999999999')
+    cy.get('#open-text-area').type('Não gostei do atendimento', {delay:0})
+    cy.contains('button', 'Enviar').click()
+ })
+
+
+ //Cypress.Commands.add('preencheEmailIncorretamente', () => {
+ //})
+
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
