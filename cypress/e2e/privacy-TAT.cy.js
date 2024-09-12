@@ -1,4 +1,5 @@
-describe('Testes da Central de atendimento do cliente TAT', function () {
+Cypress._.times(5, () => {
+  describe('Testes da Central de atendimento do cliente TAT', function () {
     beforeEach(() => {
       cy.visit('./src/privacy.html')
     })
@@ -8,3 +9,6 @@ it ('verifica titulo', ()=> {
 })
 
 })
+})
+
+

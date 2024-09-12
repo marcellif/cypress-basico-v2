@@ -10,9 +10,9 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
     cy.title().should('eq','Central de Atendimento ao Cliente TAT');
   })
 
-  it ('preenche os campos obrigatórios e envia o formulário', () => {
+  it.only ('preenche os campos obrigatórios e envia o formulário', () => {
     cy.clock()
-    const textoLongo = "Minha sincera gratidão pelo seu trabalho. Sua habilidade e empenho são um exemplo para todos nós. Sei que o caminho profissional nem sempre é fácil, mas você tem enfrentado desafios com coragem e perseverança, inspirando todos ao seu redor."
+    const textoLongo = Cypress._.repeat(' Muito obrigada ', 40)
     cy.get('#firstName').type('Angelina')
     cy.get('#lastName').type('Jolie')
     cy.get('#email').type('angelina@mailinator.com')
