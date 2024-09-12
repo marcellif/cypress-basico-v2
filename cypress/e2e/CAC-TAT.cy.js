@@ -1,6 +1,7 @@
 //<reference types ="Cypress"/>
 
 describe('Testes da Central de atendimento do cliente TAT', function () {
+  const pulaTempo = 3000
   beforeEach(() => {
     cy.visit('./src/index.html')
   })
@@ -10,6 +11,7 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
   })
 
   it ('preenche os campos obrigatórios e envia o formulário', () => {
+    cy.clock()
     const textoLongo = "Minha sincera gratidão pelo seu trabalho. Sua habilidade e empenho são um exemplo para todos nós. Sei que o caminho profissional nem sempre é fácil, mas você tem enfrentado desafios com coragem e perseverança, inspirando todos ao seu redor."
     cy.get('#firstName').type('Angelina')
     cy.get('#lastName').type('Jolie')
@@ -17,18 +19,25 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
     cy.get('#phone').type('21999999999')
     cy.get('#open-text-area').type(textoLongo, {delay:0})
     cy.get('button[type="submit"]').click()
+
     cy.get('.success').should('be.visible')
+    cy.tick(pulaTempo)
+    cy.get('.success').should('be.not.visible')
   })
 
   it ('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', () => {
+  cy.clock()
   cy.get('#firstName').type('Brad')
   cy.get('#lastName').type('Pitt')
   cy.get('#email').type('bradmailinator.com')
   cy.get('#phone').type('21999999999')
   cy.get('#open-text-area').type('Não gostei do atendimento', {delay:0})
   cy.get('button[type="submit"]').click()
+
   cy.get('.error').should('be.visible')
-  })
+  cy.tick(pulaTempo)
+  cy.get('.error').should('not.be.visible')
+})
 
 
   it ('verifica se campo telefone somente aceita números', () =>{
@@ -38,13 +47,17 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
   })
 
   it('Verificação de campo obrigatorio telefone e mensagem de erro', () =>{
+    cy.clock()
     cy.get('#firstName').type('Clara')
     cy.get('#lastName').type('Herman')
     cy.get('#email').type('clara@mailinator.com')
     cy.get('#phone-checkbox').click()
     cy.get('#open-text-area').type('Gostei do atendimento', {delay:0})
     cy.get('button[type="submit"]').click()
+
     cy.get('.error').should('be.visible')
+    cy.tick(pulaTempo)
+    cy.get('.error').should('not.be.visible')
   })
 
   it ('Preenche e limpa os campos nome, sobrenome, email e telefone', () =>{
@@ -76,8 +89,12 @@ describe('Testes da Central de atendimento do cliente TAT', function () {
   })
 
   it ('envia o formuário com sucesso usando um comando customizado', () => {
+    cy.clock()
     cy.fillMandatoryFieldsAndSubmit()
+    
     cy.get('.success').should('be.visible')
+    cy.tick(pulaTempo)
+    cy.get('.success').should('not.be.visible')
   })
 
   it ('seleciona um produto (YouTube) por seu texto', () => {
