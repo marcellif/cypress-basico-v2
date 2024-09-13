@@ -207,6 +207,13 @@ it ('faz uma requisição HTTP e verifica itens', () => {
     })
 })
 
+it ('exibe o gato', () => {
+  cy.get('#cat')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+})
+
 })
 
 
